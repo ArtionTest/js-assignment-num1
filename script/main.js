@@ -6,7 +6,15 @@ function generateRandomNumber() {
 function getPlayerGuess() {
     while (true) {
         let input = prompt("Guess a number between 1 and 100:");
-            let guess = parseInt(input);
+
+        // If the user clicked Cancel, prompt() returns null
+        if (input === null) {
+            let wantsToQuit = confirm("Do you want to quit the game?");
+            if (wantsToQuit) return null;
+            else continue;            
+        }
+
+        let guess = parseInt(input);
 
         if (!isNaN(guess) && guess >= 1 && guess <= 100) {
             return guess;
@@ -37,10 +45,15 @@ function game() {
         console.log(`Attempt ${attempts} / ${maxAttempts}`);
     
         let guess = getPlayerGuess();
+
+        if (guess === null) {
+            console.log("You quit the game. Your score: 0 points.");
+            return;
+        }
+
         let result = checkGuess(guess, correctNumber);
 
         if (result === "correct") {
-            //Score: Every unused attempt = 10 points, plus 10 for winning.
             let score = (maxAttempts - attempts) * 10 + 10;
 
             console.log(`Congratulations! The number was ${correctNumber}.`);
@@ -54,5 +67,4 @@ function game() {
 
     console.log(`Game over! You used all ${maxAttempts} attempts. The number was ${correctNumber}.`);
     console.log("Your score: 0 points");
-
 }
