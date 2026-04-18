@@ -7,19 +7,22 @@ function getPlayerGuess() {
     while (true) {
         let input = prompt("Guess a number between 1 and 100:");
 
-        // If the user clicked Cancel, prompt() returns null
         if (input === null) {
             let wantsToQuit = confirm("Do you want to quit the game?");
             if (wantsToQuit) return null;
             else continue;            
         }
+        const isInteger = /^\d+$/.test(input);
 
-        const isInteger=/^\d+$/.test(input)
-
-        if (!isNaN(input) && input >= 1 && input <= 100  && isInteger) {
-            return input;
-        }       
-        alert("Invalid input. Please put a whole number between 1 and 100.");
+        if (!isInteger) {
+            alert(`"${input}" is not a valid number. Please enter whole numbers only (e.g. 42).`);
+            continue;
+        }
+        if (input < 1 || input > 100) {
+            alert(`${input} is out of range. Please enter a number between 1 and 100.`);
+            continue;
+        }
+        return input;
     }
 }
   
