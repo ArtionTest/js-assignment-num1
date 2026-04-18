@@ -1,6 +1,3 @@
-## Link
-https://artiontest.github.io/js-assignment-num1/
-
 ## Project Description
 
 "Hello, human.
@@ -34,6 +31,7 @@ This is only the beginning.
 
 Mwahahaha..."
 
+Play [Number Guessing Game.](https://artiontest.github.io/js-assignment-num1/)
 ## How to Run
 - Create an index.html file
 - Link your script.js
