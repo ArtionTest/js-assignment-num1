@@ -14,10 +14,8 @@ function getPlayerGuess() {
             else continue;            
         }
 
-        let guess = parseInt(input);
-
-        if (!isNaN(guess) && guess >= 1 && guess <= 100) {
-            return guess;
+        if (!isNaN(input) && input >= 1 && input <= 100 && Number.isInteger(input)) {
+            return input;
         }       
         alert("Invalid input. Please put a whole number between 1 and 100.");
     }
