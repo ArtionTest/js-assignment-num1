@@ -39,7 +39,7 @@ Play [Number Guessing Game.](https://artiontest.github.io/js-assignment-num1/)
 - Open the console (F12)
 - Start the game:
 ```bash
-play();
+game();
 ```
 
 ## Technologies Used
