@@ -14,7 +14,9 @@ function getPlayerGuess() {
             else continue;            
         }
 
-        if (!isNaN(input) && input >= 1 && input <= 100 && Number.isInteger(input)) {
+        const isInteger=/^\d+$/.test(input)
+
+        if (!isNaN(input) && input >= 1 && input <= 100  && isInteger) {
             return input;
         }       
         alert("Invalid input. Please put a whole number between 1 and 100.");
