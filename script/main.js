@@ -1,11 +1,14 @@
 alert(`
-The Evil AI is here! We have to defeat him in a number guessing game.\n
-Open your console and write 'game()' to begin.
-How to open the console:\n
-Windows/Linux -> F12 or Ctrl+Shift+I
-Mac Chrome -> Cmd+Option+I
+The Evil AI is here! We have to defeat him in a number guessing game.
+
+The game will start now!
+
+(Optional) Open the console to see extra logs:
+Windows/Linux -> F12 or Ctrl+Shift+J
+Mac Chrome -> Cmd+Option+J
 Mac Safari -> Cmd+Option+C
-Mac Firefox -> Cmd+Option+K\n
+Mac Firefox -> Cmd+Option+K
+
 Good luck!'`);
 console.log(
   "Welcome to the game! I have picked a number between 1 and 100. You only have 10 attempts. GO!",
@@ -93,7 +96,12 @@ function game() {
     lastResult = result;
     console.log(`${result}, try again.`);
   }
-
+alert(`
+    Game over! You used all ${maxAttempts} attempts. THE EVIL AI WINS!
+    
+    The number was ${correctNumber}.
+    
+    Your score: 0 points`);
   console.log(
     `Game over! You used all ${maxAttempts} attempts. The number was ${correctNumber}.`,
   );
