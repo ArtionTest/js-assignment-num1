@@ -15,23 +15,37 @@ function generateRandomNumber() {
   return Math.floor(Math.random() * 100) + 1;
 }
 
-function getPlayerGuess() {
+function getPlayerGuess(attempt, maxAttempts, lastGuess) {
   while (true) {
-    let input = prompt("Guess a number between 1 and 100:");
+    let message = `Attempt ${attempt}/${maxAttempts}`;
 
-    // If the user clicked Cancel, prompt() returns null
+    if (lastGuess) {
+      message += `\nLast result: ${lastGuess}`;
+    }
+
+    message += `\n\nGuess a number between 1 and 100:`;
+    let input = prompt(message);
+
     if (input === null) {
       let wantsToQuit = confirm("Do you want to quit the game?");
       if (wantsToQuit) return null;
       else continue;
     }
-
     const isInteger = /^\d+$/.test(input);
 
-    if (!isNaN(input) && input >= 1 && input <= 100 && isInteger) {
-      return input;
+    if (!isInteger) {
+      alert(
+        `"${input}" is not a valid number. Please enter whole numbers only (e.g. 42).`,
+      );
+      continue;
     }
-    alert("Invalid input. Please put a whole number between 1 and 100.");
+    if (input < 1 || input > 100) {
+      alert(
+        `${input} is out of range. Please enter a number between 1 and 100.`,
+      );
+      continue;
+    }
+    return input;
   }
 }
 
@@ -49,12 +63,12 @@ function game() {
   const correctNumber = generateRandomNumber();
   const maxAttempts = 10;
   let attempts = 0;
-
+  let lastResult;
   while (attempts < maxAttempts) {
     attempts++;
     console.log(`Attempt ${attempts} / ${maxAttempts}`);
 
-    let guess = getPlayerGuess();
+    let guess = getPlayerGuess(attempts, maxAttempts, lastResult);
 
     if (guess === null) {
       console.log("You quit the game. Your score: 0 points.");
@@ -66,12 +80,17 @@ function game() {
     if (result === "correct") {
       let score = (maxAttempts - attempts) * 10 + 10;
 
+      alert(`
+        Congratulations! The Evil AI has been defeated!
+        
+        You guessed the number ${correctNumber} in ${attempts} attempt(s)!
+        Your score: ${score} points`);
       console.log(`Congratulations! The number was ${correctNumber}.`);
       console.log(`You won in ${attempts} attempt(s).`);
       console.log(`Your score: ${score} points`);
       return;
     }
-
+    lastResult = result;
     console.log(`${result}, try again.`);
   }
 
